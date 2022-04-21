@@ -20,6 +20,12 @@ public interface SysoutCaptureAndAssertionAbility {
         assertThat(OUT.toString()).contains(expected);
     }
 
+    default void assertSysoutContains(String... expectedList) {
+        for (String expected : expectedList) {
+            assertSysoutContains(expected);
+        }
+    }
+
     default void resetOut() {
         OUT.reset();
     }
