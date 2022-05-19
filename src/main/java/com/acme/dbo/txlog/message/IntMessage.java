@@ -7,8 +7,8 @@ public class IntMessage implements Message<Integer> {
         this.value = value;
     }
 
-    public Integer getMessage() {
-        return value;
+    public String getMessage() {
+        return value.toString();
     }
 
     public Integer getValue() {
