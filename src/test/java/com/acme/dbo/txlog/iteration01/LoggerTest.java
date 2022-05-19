@@ -40,7 +40,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test
+/*    @Test
     public void shouldLogByte() throws IOException {
         //region when
         Facade.log((byte)1);
@@ -73,7 +73,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("a");
         assertSysoutContains("b");
         //endregion
-    }
+    }*/
 
     @Test
     public void shouldLogString() throws IOException {
@@ -91,7 +91,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test
+/*    @Test
     public void shouldLogBoolean() throws IOException {
         //region when
         Facade.log(true);
@@ -118,5 +118,5 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("reference: ");
         assertSysoutContains("@");
         //endregion
-    }
+    }*/
 }

@@ -89,7 +89,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test
+/*    @Test
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when
         Facade.log("str 1");
@@ -108,5 +108,5 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
             "0"
         );
         //endregion
-    }
+    }*/
 }
