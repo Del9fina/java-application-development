@@ -3,7 +3,7 @@ package com.acme.dbo.txlog.message;
 public class IntMessage implements Message<Integer> {
     private Integer value;
 
-    public IntMessage(int value) {
+    public IntMessage(Integer value) {
         this.value = value;
     }
 
