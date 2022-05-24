@@ -1,26 +1,33 @@
 package com.acme.dbo.txlog.message;
 
-public class IntMessage implements Message<Integer> {
-    private Integer value;
+public class IntMessage extends DecoratingMessage {
+    private int value;
 
-    public IntMessage(Integer value) {
+    public IntMessage(int value) {
+        super(PRIMITIVE_PREFIX);
         this.value = value;
     }
 
+    @Override
     public String getMessage() {
-        return value.toString();
+        return String.valueOf(value);
     }
 
-    public Integer getValue() {
-        return value;
+    @Override
+    public void aggregate(Message other) {
+        value += ((IntMessage) other).value;
     }
 
-    public void aggregate(Message<Integer> other) {
-        value += other.getValue();
-    }
-
-    public boolean shouldAggregate(Message<Integer> other) {
-        Integer otherValue = other.getValue();
+    @Override
+    public boolean shouldAggregate(Message other) {
+        if (!isSameType(other)) {
+            return false;
+        }
+        int otherValue = ((IntMessage) other).value;
         return !(otherValue > 0 && this.value > Integer.MAX_VALUE - otherValue || otherValue < 0 && this.value < Integer.MIN_VALUE - otherValue);
+    }
+
+    private boolean isSameType(Message other) {
+        return other instanceof IntMessage;
     }
 }

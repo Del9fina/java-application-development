@@ -2,15 +2,17 @@ package com.acme.dbo.txlog.message;
 
 import java.util.Objects;
 
-public class StringMessage implements Message<String> {
+public class StringMessage extends DecoratingMessage {
     private final String value;
     private int count;
 
     public StringMessage(String value) {
+        super(STRING_PREFIX);
         this.value = value;
         this.count = 1;
     }
 
+    @Override
     public String getMessage() {
         if (count == 1) {
             return value;
@@ -18,15 +20,17 @@ public class StringMessage implements Message<String> {
         return String.format("%s (x%s)", value, count);
     }
 
-    public String getValue() {
-        return value;
-    }
-
-    public void aggregate(Message<String> other) {
+    @Override
+    public void aggregate(Message other) {
         count += 1;
     }
 
-    public boolean shouldAggregate(Message<String> other) {
-        return Objects.equals(value, other.getValue());
+    @Override
+    public boolean shouldAggregate(Message other) {
+        return isSameType(other) && Objects.equals(value, ((StringMessage) other).value);
+    }
+
+    private boolean isSameType(Message other) {
+        return other instanceof StringMessage;
     }
 }

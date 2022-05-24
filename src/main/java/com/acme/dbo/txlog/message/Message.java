@@ -1,8 +1,17 @@
 package com.acme.dbo.txlog.message;
 
-public interface Message<T> {
+public interface Message {
     String getMessage();
-    T getValue();
-    void aggregate(Message<T> other);
-    boolean shouldAggregate(Message<T> other);
+
+    default String getDecorated() {
+        return getMessage();
+    }
+
+    default void aggregate(Message other) {
+        // do nothing
+    }
+
+    default boolean shouldAggregate(Message other) {
+        return false;
+    }
 }
